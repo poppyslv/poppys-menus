@@ -20,7 +20,7 @@ a{color:#2E3192}a:hover{color:#EB297C}
 <style>
 :root{color-scheme:only light}
 html,body{margin:0;height:100%;overflow:hidden;background:#EAF8FA}
-.stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:center center;transform:translate(-50%,-50%) scale(var(--s,1))}
+.stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:center center;transform:translate(-50%,-50%) scale(.5)}
 @media (prefers-reduced-motion: reduce){.motion-on *{animation:none!important}}
 </style>
 </head>
@@ -115,9 +115,18 @@ html,body{margin:0;height:100%;overflow:hidden;background:#EAF8FA}
 </div>
 <script>
 (function(){
-  var st=document.getElementById('stage');
-  function fit(){ st.style.setProperty('--s', Math.min(window.innerWidth/1920, window.innerHeight/1080)); }
-  window.addEventListener('resize', fit); fit();
+  var st=document.getElementById('stage'), last='';
+  function fit(){
+    var de=document.documentElement, vv=window.visualViewport;
+    var w=Math.min(de.clientWidth||window.innerWidth, vv?vv.width:1e9, window.innerWidth||1e9);
+    var h=Math.min(de.clientHeight||window.innerHeight, vv?vv.height:1e9, window.innerHeight||1e9);
+    if(!w||!h) return;
+    var s=Math.min(w/1920, h/1080), v=s.toFixed(4);
+    if(v!==last){ last=v; st.style.transform='translate(-50%,-50%) scale('+v+')'; }
+  }
+  window.addEventListener('resize', fit); window.addEventListener('load', fit);
+  if(window.visualViewport) window.visualViewport.addEventListener('resize', fit);
+  fit(); setInterval(fit, 1000);
   // Pick up menu changes automatically: reload every 15 minutes.
   setTimeout(function(){ location.reload(); }, 15*60*1000);
 })();
