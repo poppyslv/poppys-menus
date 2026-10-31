@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="only light">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Poppy's Specialty Sundaes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700&display=swap">
+<style>
+/* Layout: brand header, then a fluid card grid — 4 across on wide screens, 2 on tablets, 1 on phones. Single light brand look. */
+:root{
+  --bg:#EAF8FA;        /* soft aqua ground */
+  --card:#FFFFFF;
+  --navy:#2E3192;      /* logo navy */
+  --pink:#EB297C;      /* logo pink */
+  --aqua:#62CADB;      /* logo aqua */
+  --muted:#4B4E9E;     /* description text */
+  --display:'Fredoka', 'Nunito', system-ui, sans-serif;
+  --body:'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color-scheme: only light;
+}
+*{box-sizing:border-box}
+body{
+  background:var(--bg); color:var(--navy); font-family:var(--body);
+  padding-left:max(16px, env(safe-area-inset-left, 0px));
+  padding-right:max(16px, env(safe-area-inset-right, 0px));
+  padding-block:clamp(16px, 3vw, 36px);
+}
+.menu{max-width:1600px; margin:0 auto; display:flex; flex-direction:column; gap:clamp(18px, 2.4vw, 32px)}
+header{display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:16px}
+.logo{width:clamp(150px, 20vw, 300px); height:auto; display:block}
+h1{margin:0; font-family:var(--display); font-weight:700; font-size:clamp(34px, 5.6vw, 84px); line-height:1; letter-spacing:-0.01em; text-align:center; text-wrap:balance}
+.price{justify-self:end; margin:0; background:var(--pink); color:#FFFFFF; border-radius:999px; padding:.3em .8em; font-family:var(--display); font-weight:600; font-size:clamp(24px, 3.2vw, 50px); line-height:1; transform:rotate(-2deg); white-space:nowrap; font-variant-numeric:tabular-nums}
+.price small{font-size:.5em; font-weight:500}
+.grid{display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:clamp(14px, 1.6vw, 24px)}
+.card{background:var(--card); border-radius:28px; padding:16px 22px 22px; display:flex; flex-direction:column; align-items:center; text-align:center; box-shadow:0 6px 18px rgba(46,49,146,.10); min-width:0}
+.photo{position:relative; width:100%; height:clamp(170px, 15vw, 230px); display:flex; align-items:flex-end; justify-content:center}
+.photo.wide{align-items:center}
+.photo::before{content:""; position:absolute; left:22%; right:22%; top:12%; bottom:0; background:var(--aqua); opacity:.45; border-radius:46% 54% 42% 58% / 55% 45% 55% 45%}
+.photo.wide::before{left:10%; right:10%; top:16%; bottom:6%}
+.photo img{position:relative; height:100%; width:auto; max-width:100%; object-fit:contain}
+.photo.wide img{height:auto; width:92%}
+.card h2{margin:12px 0 6px; font-family:var(--display); font-weight:600; font-size:clamp(24px, 2vw, 34px); line-height:1.05; text-wrap:balance}
+.card p{margin:0; font-size:clamp(16px, 1.15vw, 19px); font-weight:600; line-height:1.4; color:var(--muted); max-width:34ch}
+
+@keyframes pfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes blob{0%,100%{border-radius:46% 54% 42% 58% / 55% 45% 55% 45%}50%{border-radius:56% 44% 52% 48% / 45% 55% 45% 55%}}
+@keyframes pop{0%,88%,100%{transform:rotate(-2deg) scale(1)}94%{transform:rotate(-2deg) scale(1.07)}}
+@media (prefers-reduced-motion: no-preference){
+  .photo img{animation:pfloat 6s ease-in-out infinite}
+  .photo::before{animation:blob 9s ease-in-out infinite}
+  .card:nth-child(2) .photo img,.card:nth-child(2) .photo::before{animation-delay:-1s}
+  .card:nth-child(3) .photo img,.card:nth-child(3) .photo::before{animation-delay:-2s}
+  .card:nth-child(4) .photo img,.card:nth-child(4) .photo::before{animation-delay:-3s}
+  .card:nth-child(5) .photo img,.card:nth-child(5) .photo::before{animation-delay:-4s}
+  .card:nth-child(6) .photo img,.card:nth-child(6) .photo::before{animation-delay:-5s}
+  .card:nth-child(7) .photo img,.card:nth-child(7) .photo::before{animation-delay:-6s}
+  .card:nth-child(8) .photo img,.card:nth-child(8) .photo::before{animation-delay:-7s}
+  .price{animation:pop 7s ease-in-out infinite}
+}
+
+@media (max-width: 1100px){
+  .grid{grid-template-columns:repeat(2, minmax(0, 1fr))}
+}
+@media (max-width: 640px){
+  header{grid-template-columns:1fr auto; grid-template-areas:"logo price" "title title"; row-gap:14px}
+  .logo{grid-area:logo}
+  .price{grid-area:price}
+  h1{grid-area:title}
+  .grid{grid-template-columns:minmax(0, 1fr)}
+  .photo{height:200px}
+}
+</style>
+</head>
+<body>
+<main class="menu">
+  <header>
+    <img class="logo" src="../../images/poppys-logo.png" alt="Poppy's Frozen Yogurt and Ice Cream">
+    <h1>Specialty Sundaes</h1>
+    <p class="price">$13.49 <small>each</small></p>
+  </header>
+
+  <section class="grid" aria-label="Specialty sundaes">
+    <article class="card">
+      <div class="photo"><img src="../../images/spicy-mexican.webp" alt="Spicy Mexican sundae"></div>
+      <h2>Spicy Mexican</h2>
+      <p>Spicy Explosion of Dole Pineapple, Italian Ice, Coconut Pineapple Ice Cream, with Chamoy Sauce, Spices, Tama-Roca Stick</p>
+    </article>
+    <article class="card">
+      <div class="photo wide"><img src="../../images/banana-split.webp" alt="Traditional banana split"></div>
+      <h2>Traditional Banana Split</h2>
+      <p>Chocolate, Vanilla, Strawberry Ice Creams, With Pineapple, Strawberry &amp; Maple Walnut Toppings, Chocolate Sauce, Whipped Cream &amp; Cherry</p>
+    </article>
+    <article class="card">
+      <div class="photo"><img src="../../images/bananarama.webp" alt="Bananarama sundae"></div>
+      <h2>Bananarama</h2>
+      <p>Layers of Vanilla Ice Cream, Banana, Whipped Cream, Heath Bar &amp; Caramel Sauce</p>
+    </article>
+    <article class="card">
+      <div class="photo"><img src="../../images/cookie-monster.webp" alt="Cookie Monster sundae"></div>
+      <h2>Cookie Monster</h2>
+      <p>Cookies n Cream Ice Cream, Oreo Crumb, Oreo Pieces, Chocolate Sauce, Cream, Mini-Oreos</p>
+    </article>
+    <article class="card">
+      <div class="photo"><img src="../../images/mint-fudge-brownie.webp" alt="Mint Fudge Brownie sundae"></div>
+      <h2>Mint Fudge Brownie</h2>
+      <p>Layers of Mint Choc Chip Ice Cream, Brownies, Hot Fudge &amp; Whipped Cream with Andes Mint &amp; Chocolate Chips</p>
+    </article>
+    <article class="card">
+      <div class="photo"><img src="../../images/strawberry-bliss.webp" alt="Strawberry Bliss sundae"></div>
+      <h2>Strawberry Bliss</h2>
+      <p>Light &amp; Refreshing with Vanilla &amp; Strawberry Ice cream, Strawberry Boba, Fresh Strawberries, Strawberry Straws, Strawberry Sauce &amp; Whipped Cream</p>
+    </article>
+    <article class="card">
+      <div class="photo wide"><img src="../../images/churro-delight.webp" alt="Churro Delight sundae"></div>
+      <h2>Churro Delight</h2>
+      <p>Vanilla Ice Cream, Churros, Strawberries, Whipped Cream &amp; Strawberry Sauce</p>
+    </article>
+    <article class="card">
+      <div class="photo"><img src="../../images/turtle.webp" alt="Turtle sundae"></div>
+      <h2>Turtle</h2>
+      <p>Decadent blend of Sea Salt Caramel Ice Cream, Heath Bar, Hot Fudge &amp; Caramel Sauce, Pecans, Whipped Cream &amp; Cherry</p>
+    </article>
+  </section>
+</main>
+
+</body>
+</html>
