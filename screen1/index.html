@@ -9,6 +9,10 @@
 <style>
 
 a{color:#2E3192}a:hover{color:#EB297C}
+@keyframes wallshine{0%{transform:translateX(-140%)}1.1%{transform:translateX(560%)}100%{transform:translateX(560%)}}
+@keyframes twinkle{0%,100%{transform:scale(.6) rotate(0deg)}50%{transform:scale(1.15) rotate(45deg)}}
+.wall-shine{position:absolute;top:-10%;left:0;width:22%;height:120%;pointer-events:none;z-index:50;background:linear-gradient(100deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.55) 50%,rgba(255,255,255,0) 100%);transform:translateX(-140%);animation:wallshine 180s linear infinite}
+.wall-shine svg{position:absolute;animation:twinkle .6s ease-in-out infinite}
 </style>
 <style>
 :root{color-scheme:only light}
@@ -19,7 +23,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#EAF8FA}
 </head>
 <body>
 <div class="stage" id="stage">
-<div style="width: 1920px; height: 1080px; box-sizing: border-box; overflow: hidden; background: #EAF8FA; padding: 28px 48px 44px; display: flex; flex-direction: column; gap: 22px; font-family: 'Nunito', sans-serif; color: #2E3192">
+<div style="width: 1920px; height: 1080px; box-sizing: border-box; overflow: hidden; position: relative; background: #EAF8FA; padding: 28px 48px 44px; display: flex; flex-direction: column; gap: 22px; font-family: 'Nunito', sans-serif; color: #2E3192">
 
 <header style="height: 140px; display: flex; align-items: center; justify-content: space-between">
 <img src="../images/poppys-logo.png" alt="Poppy's Frozen Yogurt and Ice Cream" style="height: 124px; width: 355px; object-fit: contain">
@@ -66,6 +70,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#EAF8FA}
 </article>
 
 </div>
+<div class="wall-shine" data-wave="1"><svg viewBox="0 0 20 20" style="left: 40%; top: 18%; width: 46px; height: 46px"><path d="M10 0 Q11.5 8.5 20 10 Q11.5 11.5 10 20 Q8.5 11.5 0 10 Q8.5 8.5 10 0Z" fill="#EB297C"></path></svg><svg viewBox="0 0 20 20" style="left: 55%; top: 47%; width: 34px; height: 34px"><path d="M10 0 Q11.5 8.5 20 10 Q11.5 11.5 10 20 Q8.5 11.5 0 10 Q8.5 8.5 10 0Z" fill="#62CADB"></path></svg><svg viewBox="0 0 20 20" style="left: 35%; top: 74%; width: 40px; height: 40px"><path d="M10 0 Q11.5 8.5 20 10 Q11.5 11.5 10 20 Q8.5 11.5 0 10 Q8.5 8.5 10 0Z" fill="#FFE423"></path></svg></div>
 </div>
 </div>
 <script>
@@ -82,6 +87,12 @@ html,body{margin:0;height:100%;overflow:hidden;background:#EAF8FA}
   window.addEventListener('resize', fit); window.addEventListener('load', fit);
   if(window.visualViewport) window.visualViewport.addEventListener('resize', fit);
   fit(); setInterval(fit, 1000);
+  // Sparkle wave: every TV follows the wall clock, so screens 1-6 sparkle in turn every 3 minutes.
+  var P=180, GAP=1.0;
+  [].forEach.call(document.querySelectorAll('[data-wave]'), function(e){
+    var n=+e.getAttribute('data-wave'), t=((Date.now()/1000-(n-1)*GAP)%P+P)%P;
+    e.style.animationDelay=(-t).toFixed(2)+'s';
+  });
   // Pick up menu changes automatically: reload every 15 minutes.
   setTimeout(function(){ location.reload(); }, 15*60*1000);
 })();

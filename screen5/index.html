@@ -9,6 +9,19 @@
 <style>
 
 a{color:#2E3192}a:hover{color:#EB297C}
+@keyframes wallshine{0%{transform:translateX(-140%)}1.1%{transform:translateX(560%)}100%{transform:translateX(560%)}}
+@keyframes twinkle{0%,100%{transform:scale(.6) rotate(0deg)}50%{transform:scale(1.15) rotate(45deg)}}
+.wall-shine{position:absolute;top:-10%;left:0;width:22%;height:120%;pointer-events:none;z-index:50;background:linear-gradient(100deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.55) 50%,rgba(255,255,255,0) 100%);transform:translateX(-140%);animation:wallshine 180s linear infinite}
+.wall-shine svg{position:absolute;animation:twinkle .6s ease-in-out infinite}
+@keyframes newwiggle{0%,92%,100%{transform:rotate(-12deg) scale(1)}93.5%{transform:rotate(-2deg) scale(1.12)}95%{transform:rotate(-22deg) scale(1.12)}96.5%{transform:rotate(-5deg) scale(1.06)}98%{transform:rotate(-16deg) scale(1)}}
+.new-badge{position:absolute;z-index:5;border-radius:50%;background:#EB297C;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-family:'Fredoka',sans-serif;font-weight:700;box-shadow:0 4px 10px rgba(46,49,146,.25);border:4px solid #FFFFFF;transform:rotate(-12deg);animation:newwiggle 20s ease-in-out infinite}
+@keyframes steam{0%{transform:translateY(14px) scaleX(.9);opacity:0}15%{opacity:.85}55%{transform:translateY(-34px) scaleX(1.1);opacity:0}100%{transform:translateY(-34px);opacity:0}}
+.steam{position:absolute;z-index:3;pointer-events:none;overflow:visible}
+.steam path{fill:none;stroke:#9AA7C7;stroke-width:7;stroke-linecap:round;opacity:0;animation:steam 6s ease-out infinite}
+.steam path:nth-child(2){animation-delay:.9s}.steam path:nth-child(3){animation-delay:1.8s}
+@keyframes comboSpot{0%,3%{box-shadow:0 0 0 0 rgba(255,228,35,0);transform:scale(1)}6%,28%{box-shadow:0 0 0 7px #FFE423,0 0 28px 8px rgba(255,228,35,.7);transform:scale(1.035)}31%,100%{box-shadow:0 0 0 0 rgba(255,228,35,0);transform:scale(1)}}
+.combo-box{position:relative;animation:comboSpot 9s ease-in-out infinite}
+.combo-box:nth-of-type(3){animation-delay:3s}.combo-box:nth-of-type(4){animation-delay:6s}
 </style>
 <style>
 :root{color-scheme:only light}
@@ -19,7 +32,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#EAF8FA}
 </head>
 <body>
 <div class="stage" id="stage">
-<div style="width: 1920px; height: 1080px; box-sizing: border-box; overflow: hidden; background: #EAF8FA; padding: 28px 48px 44px; display: flex; flex-direction: column; gap: 22px; font-family: 'Nunito', sans-serif; color: #2E3192">
+<div style="width: 1920px; height: 1080px; box-sizing: border-box; overflow: hidden; position: relative; background: #EAF8FA; padding: 28px 48px 44px; display: flex; flex-direction: column; gap: 22px; font-family: 'Nunito', sans-serif; color: #2E3192">
 
 <header style="height: 140px; display: flex; align-items: center; justify-content: space-between">
 <img src="../images/poppys-logo.png" alt="Poppy's Frozen Yogurt and Ice Cream" style="height: 124px; width: 355px; object-fit: contain">
@@ -34,6 +47,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#EAF8FA}
 <article style="background: #FFFFFF; border-radius: 32px; padding: 20px 36px 24px; display: flex; flex-direction: column; gap: 8px; box-shadow: 0 6px 18px rgba(46,49,146,0.10)">
 <div style="position: relative; height: 245px; display: flex; align-items: center; justify-content: center">
 <div style="position: absolute; left: 80px; right: 80px; top: 20px; bottom: 10px; background: #62CADB; opacity: 0.45; border-radius: 46% 54% 42% 58% / 55% 45% 55% 45%"></div>
+<svg class="steam" viewBox="0 0 120 70" style="left: 50%; top: -22px; width: 150px; height: 88px; margin-left: -75px"><path d="M30 66 Q18 50 30 36 Q42 22 30 6"></path><path d="M60 66 Q48 50 60 36 Q72 22 60 6"></path><path d="M90 66 Q78 50 90 36 Q102 22 90 6"></path></svg>
 <img src="../images/mini-donuts.webp" alt="Mini donuts" style="position: relative; height: 240px; object-fit: contain">
 </div>
 <h2 style="margin: 4px 0 0; font-family: 'Fredoka', sans-serif; font-size: 52px; font-weight: 700; line-height: 1">Mini Donuts</h2>
@@ -47,6 +61,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#EAF8FA}
 <article style="background: #FFFFFF; border-radius: 32px; padding: 20px 36px 24px; display: flex; flex-direction: column; gap: 8px; box-shadow: 0 6px 18px rgba(46,49,146,0.10)">
 <div style="position: relative; height: 245px; display: flex; align-items: center; justify-content: center">
 <div style="position: absolute; left: 50px; right: 50px; top: 40px; bottom: 30px; background: #62CADB; opacity: 0.45; border-radius: 46% 54% 42% 58% / 55% 45% 55% 45%"></div>
+<svg class="steam" viewBox="0 0 120 70" style="left: 50%; top: -22px; width: 150px; height: 88px; margin-left: -75px"><path d="M30 66 Q18 50 30 36 Q42 22 30 6"></path><path d="M60 66 Q48 50 60 36 Q72 22 60 6"></path><path d="M90 66 Q78 50 90 36 Q102 22 90 6"></path></svg>
 <img src="../images/churros.webp" alt="Churros" style="position: relative; width: 350px; object-fit: contain">
 </div>
 <h2 style="margin: 4px 0 0; font-family: 'Fredoka', sans-serif; font-size: 52px; font-weight: 700; line-height: 1">Churros</h2>
@@ -59,7 +74,9 @@ html,body{margin:0;height:100%;overflow:hidden;background:#EAF8FA}
 </article>
 
 <article style="background: #FFFFFF; border-radius: 32px; padding: 20px 36px 24px; display: flex; flex-direction: column; gap: 8px; box-shadow: 0 6px 18px rgba(46,49,146,0.10)">
-<div style="height: 245px; display: flex; align-items: center; justify-content: center">
+<div style="position: relative; height: 245px; display: flex; align-items: center; justify-content: center">
+<svg class="steam" viewBox="0 0 120 70" style="left: 50%; top: -22px; width: 150px; height: 88px; margin-left: -75px"><path d="M30 66 Q18 50 30 36 Q42 22 30 6"></path><path d="M60 66 Q48 50 60 36 Q72 22 60 6"></path><path d="M90 66 Q78 50 90 36 Q102 22 90 6"></path></svg>
+<div class="new-badge" style="left: 6px; top: -4px; width: 104px; height: 104px; font-size: 30px">NEW!</div>
 <img src="../images/churrito-bites.webp" alt="Churrito Bites" style="width: 330px; height: 235px; object-fit: cover; border-radius: 28px; border: 6px solid #62CADB">
 </div>
 <h2 style="margin: 4px 0 0; font-family: 'Fredoka', sans-serif; font-size: 52px; font-weight: 700; line-height: 1">Churrito Bites</h2>
@@ -77,21 +94,23 @@ html,body{margin:0;height:100%;overflow:hidden;background:#EAF8FA}
 <h2 style="margin: 0; font-family: 'Fredoka', sans-serif; font-size: 76px; font-weight: 700; line-height: 1">Combos</h2>
 <p style="margin: 8px 0 0; font-size: 24px; font-weight: 700; line-height: 30px">Donuts, Churros &amp; Churrito Bites</p>
 </div>
-<div style="flex: 1; background: #FFFFFF; border-radius: 24px; padding: 14px 26px; display: flex; align-items: center; justify-content: space-between; gap: 16px">
+<div class="combo-box" style="flex: 1; background: #FFFFFF; border-radius: 24px; padding: 14px 26px; display: flex; align-items: center; justify-content: space-between; gap: 16px">
 <div style="font-size: 30px; font-weight: 700; line-height: 40px">2 Donuts<br>2 Churros<br>2 Churrito Bites</div>
 <span style="font-family: 'Fredoka', sans-serif; font-size: 64px; font-weight: 600; color: #EB297C">$7.99</span>
 </div>
-<div style="flex: 1; background: #FFFFFF; border-radius: 24px; padding: 14px 26px; display: flex; align-items: center; justify-content: space-between; gap: 16px">
+<div class="combo-box" style="flex: 1; background: #FFFFFF; border-radius: 24px; padding: 14px 26px; display: flex; align-items: center; justify-content: space-between; gap: 16px">
 <div style="font-size: 30px; font-weight: 700; line-height: 40px">3 Donuts<br>3 Churros<br>3 Churrito Bites</div>
 <span style="font-family: 'Fredoka', sans-serif; font-size: 64px; font-weight: 600; color: #EB297C">$8.99</span>
 </div>
-<div style="flex: 1; background: #FFFFFF; border-radius: 24px; padding: 14px 26px; display: flex; align-items: center; justify-content: space-between; gap: 16px">
+<div class="combo-box" style="flex: 1; background: #FFFFFF; border-radius: 24px; padding: 14px 26px; display: flex; align-items: center; justify-content: space-between; gap: 16px">
 <div style="font-size: 30px; font-weight: 700; line-height: 40px">4 Donuts<br>4 Churros<br>4 Churrito Bites</div>
+<span style="position: absolute; right: 18px; top: -20px; background: #FFE423; color: #2E3192; border-radius: 999px; padding: 4px 16px; font-family: 'Fredoka', sans-serif; font-size: 24px; font-weight: 700; line-height: 1.1; transform: rotate(4deg)">Best value</span>
 <span style="font-family: 'Fredoka', sans-serif; font-size: 64px; font-weight: 600; color: #EB297C">$9.99</span>
 </div>
 </section>
 
 </div>
+<div class="wall-shine" data-wave="5"><svg viewBox="0 0 20 20" style="left: 40%; top: 18%; width: 46px; height: 46px"><path d="M10 0 Q11.5 8.5 20 10 Q11.5 11.5 10 20 Q8.5 11.5 0 10 Q8.5 8.5 10 0Z" fill="#EB297C"></path></svg><svg viewBox="0 0 20 20" style="left: 55%; top: 47%; width: 34px; height: 34px"><path d="M10 0 Q11.5 8.5 20 10 Q11.5 11.5 10 20 Q8.5 11.5 0 10 Q8.5 8.5 10 0Z" fill="#62CADB"></path></svg><svg viewBox="0 0 20 20" style="left: 35%; top: 74%; width: 40px; height: 40px"><path d="M10 0 Q11.5 8.5 20 10 Q11.5 11.5 10 20 Q8.5 11.5 0 10 Q8.5 8.5 10 0Z" fill="#FFE423"></path></svg></div>
 </div>
 </div>
 <script>
@@ -108,6 +127,12 @@ html,body{margin:0;height:100%;overflow:hidden;background:#EAF8FA}
   window.addEventListener('resize', fit); window.addEventListener('load', fit);
   if(window.visualViewport) window.visualViewport.addEventListener('resize', fit);
   fit(); setInterval(fit, 1000);
+  // Sparkle wave: every TV follows the wall clock, so screens 1-6 sparkle in turn every 3 minutes.
+  var P=180, GAP=1.0;
+  [].forEach.call(document.querySelectorAll('[data-wave]'), function(e){
+    var n=+e.getAttribute('data-wave'), t=((Date.now()/1000-(n-1)*GAP)%P+P)%P;
+    e.style.animationDelay=(-t).toFixed(2)+'s';
+  });
   // Pick up menu changes automatically: reload every 15 minutes.
   setTimeout(function(){ location.reload(); }, 15*60*1000);
 })();
