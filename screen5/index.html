@@ -133,7 +133,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#EAF8FA}
 <article style="background: #FFFFFF; border-radius: 32px; padding: 20px 36px 24px; display: flex; flex-direction: column; gap: 8px; box-shadow: 0 6px 18px rgba(46,49,146,0.10)">
 <div style="position: relative; height: 245px; display: flex; align-items: center; justify-content: center">
 <svg class="steam" viewBox="0 0 120 70" style="left: 50%; top: -22px; width: 150px; height: 88px; margin-left: -75px"><path d="M30 66 Q18 50 30 36 Q42 22 30 6"></path><path d="M60 66 Q48 50 60 36 Q72 22 60 6"></path><path d="M90 66 Q78 50 90 36 Q102 22 90 6"></path></svg>
-<div class="new-badge" style="left: 6px; top: -4px; width: 104px; height: 104px; font-size: 30px">NEW!</div>
+<div class="new-badge" data-until="2027-02-01" style="left: 6px; top: -4px; width: 104px; height: 104px; font-size: 30px">NEW!</div>
 <img src="../images/churrito-bites.webp" alt="Churrito Bites" style="width: 330px; height: 235px; object-fit: cover; border-radius: 28px; border: 6px solid #62CADB">
 </div>
 <h2 style="margin: 4px 0 0; font-family: 'Fredoka', sans-serif; font-size: 52px; font-weight: 700; line-height: 1">Churrito Bites</h2>
@@ -200,6 +200,10 @@ html,body{margin:0;height:100%;overflow:hidden;background:#EAF8FA}
     var v=e.getAttribute('data-sync').split(','), P2=+v[0], o=+v[1], t=((Date.now()/1000-o)%P2+P2)%P2;
     var val=(-t).toFixed(3)+'s', parts=(e.style.animationDelay||'').split(',');
     if(parts.length>1){ parts[parts.length-1]=val; e.style.animationDelay=parts.join(','); } else e.style.animationDelay=val;
+  });
+  // Scheduled removals: anything with data-until="YYYY-MM-DD" disappears from that date (e.g. NEW badges).
+  [].forEach.call(document.querySelectorAll('[data-until]'), function(e){
+    if(new Date() >= new Date(e.getAttribute('data-until')+'T00:00:00')) e.parentNode.removeChild(e);
   });
   // Sparkle wave: every TV follows the wall clock, so screens 1-6 sparkle in turn every 3 minutes.
   var P=180, GAP=1.0;

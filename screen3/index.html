@@ -205,6 +205,10 @@ html,body{margin:0;height:100%;overflow:hidden;background:#EAF8FA}
     var val=(-t).toFixed(3)+'s', parts=(e.style.animationDelay||'').split(',');
     if(parts.length>1){ parts[parts.length-1]=val; e.style.animationDelay=parts.join(','); } else e.style.animationDelay=val;
   });
+  // Scheduled removals: anything with data-until="YYYY-MM-DD" disappears from that date (e.g. NEW badges).
+  [].forEach.call(document.querySelectorAll('[data-until]'), function(e){
+    if(new Date() >= new Date(e.getAttribute('data-until')+'T00:00:00')) e.parentNode.removeChild(e);
+  });
   // Sparkle wave: every TV follows the wall clock, so screens 1-6 sparkle in turn every 3 minutes.
   var P=180, GAP=1.0;
   [].forEach.call(document.querySelectorAll('[data-wave]'), function(e){
