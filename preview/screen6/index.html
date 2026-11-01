@@ -144,7 +144,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#EAF8FA}
 <div style="display: grid; grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 24px">
 
 <article style="position: relative; background: #FFFFFF; border-radius: 32px; padding: 22px 36px 22px 22px; display: flex; align-items: center; gap: 22px; box-shadow: 0 6px 18px rgba(46,49,146,0.10)">
-<div class="new-badge" style="left: 8px; top: 6px; width: 104px; height: 104px; font-size: 30px">NEW!</div>
+<div class="new-badge" data-until="2027-02-01" style="left: 8px; top: 6px; width: 104px; height: 104px; font-size: 30px">NEW!</div>
 <div style="position: relative; width: 210px; height: 300px; flex: none; display: flex; align-items: center; justify-content: center">
 <div style="position: absolute; left: 0px; right: 0px; top: 40px; bottom: 20px; background: #62CADB; opacity: 0.45; border-radius: 46% 54% 42% 58% / 55% 45% 55% 45%"></div>
 <img src="../../images/affogato.webp" alt="Cold Brew Affogato" style="position: relative; width: 210px; object-fit: contain">
@@ -210,6 +210,10 @@ html,body{margin:0;height:100%;overflow:hidden;background:#EAF8FA}
     var v=e.getAttribute('data-sync').split(','), P2=+v[0], o=+v[1], t=((Date.now()/1000-o)%P2+P2)%P2;
     var val=(-t).toFixed(3)+'s', parts=(e.style.animationDelay||'').split(',');
     if(parts.length>1){ parts[parts.length-1]=val; e.style.animationDelay=parts.join(','); } else e.style.animationDelay=val;
+  });
+  // Scheduled removals: anything with data-until="YYYY-MM-DD" disappears from that date (e.g. NEW badges).
+  [].forEach.call(document.querySelectorAll('[data-until]'), function(e){
+    if(new Date() >= new Date(e.getAttribute('data-until')+'T00:00:00')) e.parentNode.removeChild(e);
   });
   // Sparkle wave: every TV follows the wall clock, so screens 1-6 sparkle in turn every 3 minutes.
   var P=180, GAP=1.0;
