@@ -141,13 +141,13 @@ html,body{margin:0;height:100%;overflow:hidden;background:#EAF8FA}
   window.addEventListener('resize', fit); window.addEventListener('load', fit);
   if(window.visualViewport) window.visualViewport.addEventListener('resize', fit);
   fit(); setInterval(fit, 1000);
-  // Seasonal themes: Thanksgiving Nov 1 - Thanksgiving Day; Christmas Dec 1 - Dec 26. ?season=tg / xmas / off to force.
+  // Seasonal themes: Thanksgiving Nov 1 - Thanksgiving Day; Christmas from the day after Thanksgiving to Dec 26. ?season=tg / xmas / off to force.
   (function(){
     var d=new Date(), first=new Date(d.getFullYear(),10,1).getDay(), tday=1+((4-first+7)%7)+21;
     var q=(location.search.match(/season=([a-z]+)/)||[])[1];
     var cls = q ? (q==='tg' ? 'season-tg' : q==='xmas' ? 'season-xmas' : '')
                 : (d.getMonth()===10 && d.getDate()<=tday) ? 'season-tg'
-                : (d.getMonth()===11 && d.getDate()<=26) ? 'season-xmas' : '';
+                : ((d.getMonth()===10 && d.getDate()>tday) || (d.getMonth()===11 && d.getDate()<=26)) ? 'season-xmas' : '';
     var root=st.firstElementChild; if(cls && root) root.classList.add(cls);
   })();
   // Clock-synced loops (e.g. Christmas chase lights running along the whole wall): data-sync="period,offset".
