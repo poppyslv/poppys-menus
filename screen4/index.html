@@ -152,7 +152,9 @@ html,body{margin:0;height:100%;overflow:hidden;background:#EAF8FA}
     var w=Math.min(de.clientWidth||window.innerWidth, vv?vv.width:1e9, window.innerWidth||1e9);
     var h=Math.min(de.clientHeight||window.innerHeight, vv?vv.height:1e9, window.innerHeight||1e9);
     if(!w||!h) return;
-    var s=Math.min(w/1920, h/1080), v=s.toFixed(4);
+    // ?fit=95 shrinks the menu to 95% to undo TV overscan (edges cut off); default 100.
+    var f=parseFloat((location.search.match(/[?&]fit=([0-9.]+)/)||[])[1])||100;
+    var s=Math.min(w/1920, h/1080)*Math.min(Math.max(f,50),100)/100, v=s.toFixed(4);
     if(v!==last){ last=v; st.style.transform='translate(-50%,-50%) scale('+v+')'; }
   }
   window.addEventListener('resize', fit); window.addEventListener('load', fit);
